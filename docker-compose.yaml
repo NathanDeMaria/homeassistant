@@ -37,8 +37,8 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=America/Chicago
-      - SUBDOMAINS={{DUCKDNS_SUBDOMAIN}}
-      - TOKEN={{DUCKDNS_TOKEN}}
+      - SUBDOMAINS=${DUCKDNS_SUBDOMAIN}
+      - TOKEN=${DUCKDNS_TOKEN}
     restart: unless-stopped
     networks:
       - ha_net

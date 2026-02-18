@@ -1,0 +1,3 @@
+{{duckdns host}} {
+    reverse_proxy {{local ip}}:8123
+}

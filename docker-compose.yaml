@@ -1,0 +1,52 @@
+services:
+  homeassistant:
+    image: ghcr.io/home-assistant/home-assistant:stable
+    container_name: homeassistant
+    volumes:
+      - ./config:/config
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - TZ=America/Chicago
+    ports:
+      - "8123:8123"
+    restart: unless-stopped
+    networks:
+      - ha_net
+    privileged: true
+
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    restart: unless-stopped
+    depends_on:
+      - homeassistant
+    networks:
+      - ha_net
+
+  duckdns:
+    image: lscr.io/linuxserver/duckdns
+    container_name: duckdns
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+      - SUBDOMAINS={{DUCKDNS_SUBDOMAIN}}
+      - TOKEN={{DUCKDNS_TOKEN}}
+    restart: unless-stopped
+    networks:
+      - ha_net
+
+networks:
+  ha_net:
+    driver: bridge
+
+volumes:
+  caddy_data:
+  caddy_config:

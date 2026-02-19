@@ -13,5 +13,6 @@ http:
     - !secret my_lan_subnet   # My LAN subnet
     - !secret my_docker_bridge    # Also had to add this because something something docker internal network
 
-  base_url: !secret duckdns_host
-
+homeassistant:
+  external_url: !secret duckdns_host
+  internal_url: !secret internal_url

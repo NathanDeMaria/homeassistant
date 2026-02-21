@@ -1,0 +1,101 @@
+toggle_theater:
+  sequence:
+    - if:
+        - condition: state
+          entity_id: input_boolean.theater_power
+          state:
+            - "on"
+      then:
+        - action: google_assistant_sdk.send_text_command
+          metadata: {}
+          data:
+            command: turn off the ping pong lights
+          alias: Ping pong off
+        - action: remote.send_command
+          metadata: {}
+          target:
+            entity_id: remote.basement_ir_blaster
+          data:
+            num_repeats: 1
+            delay_secs: 0.4
+            hold_secs: 0
+            device: projector
+            command: power
+          alias: projector power
+        - delay:
+            hours: 0
+            minutes: 0
+            seconds: 1
+            milliseconds: 0
+        - action: remote.send_command
+          metadata: {}
+          target:
+            entity_id: remote.basement_ir_blaster
+          data:
+            num_repeats: 1
+            delay_secs: 0.4
+            hold_secs: 0
+            device: projector
+            command: power
+          alias: projector power
+        - delay:
+            hours: 0
+            minutes: 0
+            seconds: 1
+            milliseconds: 0
+        - action: remote.send_command
+          metadata: {}
+          target:
+            entity_id: remote.basement_ir_blaster
+          data:
+            num_repeats: 1
+            delay_secs: 0.4
+            hold_secs: 0
+            device: audio
+            command: power
+          alias: audio power
+        - action: input_boolean.turn_off
+          metadata: {}
+          target:
+            entity_id: input_boolean.theater_power
+          data: {}
+      else:
+        - action: remote.send_command
+          metadata: {}
+          target:
+            entity_id: remote.basement_ir_blaster
+          data:
+            num_repeats: 1
+            delay_secs: 0.4
+            hold_secs: 0
+            device: projector
+            command: power
+          alias: projector power
+        - delay:
+            hours: 0
+            minutes: 0
+            seconds: 1
+            milliseconds: 0
+        - action: remote.send_command
+          metadata: {}
+          target:
+            entity_id: remote.basement_ir_blaster
+          data:
+            num_repeats: 1
+            delay_secs: 0.4
+            hold_secs: 0
+            device: audio
+            command: power
+          alias: audio power
+        - action: google_assistant_sdk.send_text_command
+          metadata: {}
+          data:
+            command: turn on the ping pong lights
+          alias: Ping pong on
+        - action: input_boolean.turn_on
+          metadata: {}
+          target:
+            entity_id: input_boolean.theater_power
+          data: {}
+  alias: Toggle theater
+  description: ""

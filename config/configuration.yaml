@@ -16,3 +16,6 @@ http:
 homeassistant:
   external_url: !secret duckdns_host
   internal_url: !secret internal_url
+
+automation: !include_dir_merge_named automations/
+script: !include_dir_merge_named scripts/

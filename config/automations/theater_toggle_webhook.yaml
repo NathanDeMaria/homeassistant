@@ -1,17 +1,17 @@
-description: ""
-mode: single
-triggers:
-  - trigger: webhook
-    allowed_methods:
-      - POST
-      - PUT
-    local_only: false
-    webhook_id: !secret theater_toggle_webhook_id
-conditions: []
-actions:
-  - action: script.turn_on
-    metadata: {}
-    target:
-      entity_id: script.toggle_theater
-    data: {}
-alias: Theater toggle
+- alias: Theater toggle
+  description: ""
+  mode: single
+  triggers:
+    - trigger: webhook
+      allowed_methods:
+        - POST
+        - PUT
+      local_only: false
+      webhook_id: !secret theater_toggle_webhook_id
+  conditions: []
+  actions:
+    - action: script.turn_on
+      metadata: {}
+      target:
+        entity_id: script.toggle_theater
+      data: {}

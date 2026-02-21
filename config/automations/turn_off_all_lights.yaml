@@ -1,0 +1,16 @@
+- alias: Turn off the lights
+  description: ""
+  triggers:
+    - trigger: webhook
+      allowed_methods:
+        - POST
+        - PUT
+      local_only: true
+      webhook_id: !secret turn_off_all_lights_webhook_id
+  conditions: []
+  actions:
+    - action: google_assistant_sdk.send_text_command
+      metadata: {}
+      data:
+        command: turn off the all the lights
+  mode: single

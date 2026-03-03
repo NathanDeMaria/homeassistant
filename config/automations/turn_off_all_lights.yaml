@@ -5,7 +5,7 @@
       allowed_methods:
         - POST
         - PUT
-      local_only: true
+      local_only: false
       webhook_id: !secret turn_off_all_lights_webhook_id
   conditions: []
   actions:

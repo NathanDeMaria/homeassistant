@@ -45,6 +45,17 @@ services:
     networks:
       - ha_net
 
+  matter-server:
+    image: ghcr.io/home-assistant-libs/python-matter-server:stable
+    container_name: matter-server
+    restart: unless-stopped
+    security_opt:
+      - apparmor=unconfined
+    volumes:
+      - matter_data:/data
+      - /run/dbus:/run/dbus:ro
+    network_mode: host
+
 networks:
   ha_net:
     driver: bridge
@@ -52,3 +63,4 @@ networks:
 volumes:
   caddy_data:
   caddy_config:
+  matter_data:

@@ -1,3 +1,5 @@
+# Turn on the dining room lamp and light when there's motion
+# or when either the lamp or light is individually turned on.
 - alias: Dining room lamp on with smart switch
   description: ""
   mode: single
@@ -10,6 +12,27 @@
     - action: switch.turn_on
       target:
         entity_id: switch.dining_room_lamp_socket_1
+      data: {}
+
+# Motion detector was set up with
+# AITRIP 1PCS Type-C ESP32 ESP-WROOM-32 Development Board WiFi + Bluetooth CP2102 Dual Core 2.4Ghz Microcontroller Compatible with Arduino (ESP32 30P, Type-C)
+# and then using
+# https://esphome.io/projects/?type=bluetooth
+- alias: Dining room lamp and light on with motion
+  description: ""
+  mode: single
+  triggers:
+    - trigger: state
+      entity_id: event.dining_motion_detector_motion
+  conditions: []
+  actions:
+    - action: switch.turn_on
+      target:
+        entity_id: switch.dining_room_lamp_socket_1
+      data: {}
+    - action: light.turn_on
+      target:
+        entity_id: light.smart_wi_fi_switch
       data: {}
 
 - alias: Smart switch on with dining room lamp

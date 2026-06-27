@@ -1,0 +1,11 @@
+theater_force_off:
+  sequence:
+    - action: input_boolean.turn_off
+      metadata: {}
+      target:
+        entity_id: input_boolean.theater_power
+      data: {}
+    - action: script.theater_devices_off
+      alias: Turn off devices
+  alias: Theater force off
+  description: ""

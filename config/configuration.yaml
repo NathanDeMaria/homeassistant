@@ -19,3 +19,9 @@ homeassistant:
 
 automation: !include_dir_merge_list automations/
 script: !include_dir_merge_named scripts/
+
+input_boolean:
+  theater_button_waiting:
+    name: Theater Button Waiting
+  theater_power:
+    name: Theater Power

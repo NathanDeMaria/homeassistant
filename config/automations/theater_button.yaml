@@ -1,0 +1,50 @@
+- alias: Theater button single press
+  description: ""
+  mode: single
+  triggers:
+    - trigger: state
+      entity_id: event.theater_button_button_1
+  conditions:
+    - condition: state
+      entity_id: input_boolean.theater_button_waiting
+      state: "off"
+  actions:
+    - action: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.theater_button_waiting
+      data: {}
+    - delay:
+        seconds: 5
+    - if:
+        - condition: state
+          entity_id: input_boolean.theater_button_waiting
+          state: "on"
+      then:
+        - action: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.theater_button_waiting
+          data: {}
+        - action: script.turn_on
+          target:
+            entity_id: script.toggle_theater
+          data: {}
+
+- alias: Theater button double press
+  description: ""
+  mode: single
+  triggers:
+    - trigger: state
+      entity_id: event.theater_button_button_1
+  conditions:
+    - condition: state
+      entity_id: input_boolean.theater_button_waiting
+      state: "on"
+  actions:
+    - action: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.theater_button_waiting
+      data: {}
+    - action: script.turn_on
+      target:
+        entity_id: script.theater_force_off
+      data: {}
